@@ -3,6 +3,12 @@
     <groupId>org.interview</groupId>
     <artifactId>bieber-tweets</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <properties>
+        <version.google-oauth>1.18.0-rc</version.google-oauth>
+        <version.lombok>1.18.10</version.lombok>
+        <version.jackson>2.11.2</version.jackson>
+        <version.jackson-datatype>2.11.0</version.jackson-datatype>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -21,7 +27,22 @@
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client</artifactId>
-            <version>1.18.0-rc</version>
+            <version>${version.google-oauth}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${version.jackson-datatype}</version>
         </dependency>
     </dependencies>
 </project>
