@@ -24,7 +24,7 @@ public class Main {
     private static final String TWITTER_CONSUMER_SECRET_NAME = "TWITTER_CONSUMER_SECRET";
     private static final String OUTPUT_DIRECTORY = "output";
     private static final String DEFAULT_WORD = "Bieber";
-    private static final int DEFAULT_MAX_TWEETS = 3;
+    private static final int DEFAULT_MAX_TWEETS = 100;
     private static final Duration DEFAULT_MAX_TIME = Duration.ofSeconds(30);
 
     public static void main(String[] args) {
