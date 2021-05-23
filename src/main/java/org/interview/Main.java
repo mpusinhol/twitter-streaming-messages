@@ -1,5 +1,6 @@
 package org.interview;
 
+import org.apache.commons.lang3.StringUtils;
 import org.interview.configs.PropertiesLoader;
 import org.interview.services.SocialMidiaService;
 import org.interview.services.impl.TwitterServiceImpl;
@@ -22,12 +23,18 @@ public class Main {
 
     private static final String TWITTER_CONSUMER_KEY_NAME = "TWITTER_CONSUMER_KEY";
     private static final String TWITTER_CONSUMER_SECRET_NAME = "TWITTER_CONSUMER_SECRET";
-    private static final String OUTPUT_DIRECTORY = "output";
+    private static final String DEFAULT_OUTPUT_DIRECTORY = "output";
     private static final String DEFAULT_WORD = "Bieber";
     private static final int DEFAULT_MAX_TWEETS = 100;
     private static final Duration DEFAULT_MAX_TIME = Duration.ofSeconds(30);
 
     public static void main(String[] args) {
+        String wordToTrack = args.length >= 1 ? args[0] : DEFAULT_WORD;
+        Integer maxTweets = args.length >= 2 && StringUtils.isNumeric(args[1]) ?
+                Integer.valueOf(args[1]) : DEFAULT_MAX_TWEETS;
+        Duration maxTime = args.length >= 3 && StringUtils.isNumeric(args[2]) ?
+                Duration.ofSeconds(Integer.valueOf(args[2])) : DEFAULT_MAX_TIME;
+        String outputDirectory = args.length >= 4 ? args[3] : DEFAULT_OUTPUT_DIRECTORY;
 
         List<String> variablesToLoad = Arrays.asList(TWITTER_CONSUMER_KEY_NAME, TWITTER_CONSUMER_SECRET_NAME);
         Map<String, String> loadedVariablesMap = PropertiesLoader.loadVariables(variablesToLoad);
@@ -39,11 +46,14 @@ public class Main {
 
         try {
             SocialMidiaService twitterService = new TwitterServiceImpl(twitterConsumerKey, twitterConsumerSecret);
-            twitterService.processRealtimePosts(DEFAULT_WORD, DEFAULT_MAX_TWEETS, DEFAULT_MAX_TIME, output);
-            Files.write(Paths.get(OUTPUT_DIRECTORY + "/" + Instant.now() + ".json"), output.toByteArray());
+            twitterService.processRealtimePosts(wordToTrack, maxTweets, maxTime, output);
 
+            String filename = outputDirectory + "/" + Instant.now() + ".json";
+            Files.write(Paths.get(filename), output.toByteArray());
+
+            LOGGER.info("Output written to " + filename);
         } catch (NoSuchFileException e) {
-            LOGGER.error("Could not create output file. Please verify if directory -> {} <- exists.", OUTPUT_DIRECTORY, e);
+            LOGGER.error("Could not create output file. Please verify if directory -> {} <- exists.", outputDirectory, e);
         } catch (IllegalArgumentException e) {
             LOGGER.error("Twitter consumer key and secret must not be null or empty."
                     + " Please add them to application.properties or as environment variables.", e);

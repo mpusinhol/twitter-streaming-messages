@@ -1,5 +1,7 @@
 package org.interview.configs;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -13,7 +15,7 @@ public class PropertiesLoader {
 
     public static Properties loadProperties(String resourceName) throws IOException {
 
-        if (resourceName == null || "".equals(resourceName)) {
+        if (StringUtils.isEmpty(resourceName)) {
             throw new IllegalArgumentException("ResourceName must not be null or empty.");
         }
 

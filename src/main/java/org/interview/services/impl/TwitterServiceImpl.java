@@ -7,6 +7,7 @@ import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequestFactory;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import org.apache.commons.lang3.StringUtils;
 import org.interview.dto.twitter.Author;
 import org.interview.dto.twitter.Message;
 import org.interview.dto.twitter.Tweet;
@@ -34,7 +35,7 @@ public class TwitterServiceImpl implements SocialMidiaService {
 
     public TwitterServiceImpl(String consumerKey, String consumerSecret) {
 
-        if (consumerKey == null || "".equals(consumerSecret)) {
+        if (StringUtils.isEmpty(consumerKey) || StringUtils.isEmpty(consumerSecret)) {
             throw new IllegalArgumentException("Consumer key and consumer secret must not be null.");
         }
 
@@ -64,7 +65,7 @@ public class TwitterServiceImpl implements SocialMidiaService {
 
         String url = TWITTER_API_URL;
 
-        if (wordToTrack != null && wordToTrack != "") {
+        if (!StringUtils.isEmpty(wordToTrack)) {
             url += "?track=" + wordToTrack;
         }
 
@@ -83,7 +84,7 @@ public class TwitterServiceImpl implements SocialMidiaService {
                 .doOnNext(tweet -> LOGGER.info("Processing tweet number {}: {}.", eventCounter.get(), tweet.toString()))
                 .collect(TreeSet<Author>::new, this::collectTweet)
                 .doOnError(e -> LOGGER.error("Error while processing tweets.", e))
-                .doOnSuccess(authors -> LOGGER.info("Finished successfully processing {} tweets.", eventCounter.get()))
+                .doOnSuccess(authors -> LOGGER.info("Finished successfully processing {} tweets.", eventCounter.decrementAndGet()))
                 .blockingGet();
 
         OBJECT_MAPPER.writeValue(output, processedTweets);
