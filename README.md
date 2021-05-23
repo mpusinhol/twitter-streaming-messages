@@ -67,3 +67,55 @@ If you want to, you can also disregard the provided classes or Maven configurati
 
 You are assigned to you own private repository. Please use your own branch and do not commit on master.
 When the assignment is finished, please create a pull request on the master of this repository, and your contact person will be notified automatically. 
+
+## Running the app
+
+The app accepts four arguments (in order):
+1. Word to track in tweets
+2. Maximum number of tweets to fetch
+3. Maximum time to fetch tweets (in seconds)
+4. Output folder
+
+If no arguments are passed, the application will use default values:
+1. Bieber
+2. 100
+3. 30s
+4. /output
+
+### With Docker
+
+From the root folder, run the following command:
+
+```docker build -t ${YOUR_IMAGE_NAME} .```
+
+Then, using default arguments:
+
+```docker run -v ${PWD}/output:/app/output -v ${PWD}/log:/app/log -it ${YOUR_IMAGE_NAME}```
+
+Or:
+
+```docker run -v ${PWD}/output:/app/output -v ${PWD}/log:/app/log -it ${YOUR_IMAGE_NAME} ${wordToTrack} ${maxTweets} ${maxTime} ${outputDir}```
+
+Example:
+
+```docker build -t mpusinhol/bieber-tweets .```
+``````docker run -v ${PWD}/output:/app/output -v ${PWD}/log:/app/log -it mpusinhol/bieber-tweets chess 10``````
+
+### With Maven
+
+Make sure you have JDK 11 installed.
+Then, from the root folder, run the following command:
+
+```mvn clean package```
+
+Then, to use default arguments:
+
+```java -jar target/bieber-tweets-1.0.0-SNAPSHOT.jar```
+
+Or:
+
+```java -jar target/bieber-tweets-1.0.0-SNAPSHOT.jar ${wordToTrack} ${maxTweets} ${maxTime} ${outputDir}```
+
+Example:
+
+```java -jar target/bieber-tweets-1.0.0-SNAPSHOT.jar "justin bieber" 10 15```
