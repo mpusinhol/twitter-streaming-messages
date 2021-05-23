@@ -82,6 +82,10 @@ If no arguments are passed, the application will use default values:
 3. 30s
 4. /output
 
+### Pre requisites
+
+On src/main/resources/application.properties, add the values for twitter consumer key and secret.
+
 ### With Docker
 
 From the root folder, run the following command:
