@@ -28,6 +28,15 @@ public class Main {
     private static final int DEFAULT_MAX_TWEETS = 100;
     private static final Duration DEFAULT_MAX_TIME = Duration.ofSeconds(30);
 
+    /**
+     * Calls twitter service to fetch realtime tweets and writes the results to a file
+     *
+     * @param args Optional arguments to override default values.
+     *             arg[0] will override default word to track on tweets
+     *             arg[1] will override default number of max tweets to fetch
+     *             arg[2] will override default max time to fetch tweets
+     *             arg[3] will override default output folder to place the results
+     */
     public static void main(String[] args) {
         String wordToTrack = args.length >= 1 ? args[0] : DEFAULT_WORD;
         Integer maxTweets = args.length >= 2 && StringUtils.isNumeric(args[1]) ?
