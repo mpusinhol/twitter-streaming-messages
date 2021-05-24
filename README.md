@@ -84,7 +84,8 @@ If no arguments are passed, the application will use default values:
 
 ### Pre requisites
 
-On src/main/resources/application.properties, add the values for twitter consumer key and secret.
+1. On src/main/resources/application.properties, add the values for twitter consumer key and secret.
+2. Make sure you have created `/output` directory on the root of your project - or pass another output directory as argument to the application.
 
 ### With Docker
 
