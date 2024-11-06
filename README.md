@@ -1,19 +1,6 @@
-```
-*************************************************************
-*                                                           *
-*       ________  __    __  ________    ____       ______   *
-*      /_/_/_/_/ /_/   /_/ /_/_/_/_/  _/_/_/_   __/_/_/_/   *
-*     /_/_____  /_/___/_/    /_/    /_/___/_/  /_/          *
-*    /_/_/_/_/   /_/_/_/    /_/    /_/_/_/_/  /_/           *
-*   ______/_/       /_/    /_/    /_/   /_/  /_/____        *
-*  /_/_/_/_/       /_/    /_/    /_/   /_/    /_/_/_/ . io  *
-*                                                           *
-*************************************************************
-```
+# Exercise #
 
-# Sytac Java Exercise #
-
-This development test is used as part of Sytac selection for Java developers. You are requested to develop a simple application that covers all the requirements listed below. To have an indication of the criteria that will be used to judge your submission, all the following are considered as metrics of good development:
+You are requested to develop a simple application that covers all the requirements listed below. To have an indication of the criteria that will be used to judge your submission, all the following are considered as metrics of good development:
 
 + Correctness of the implementation
 + Decent test coverage
